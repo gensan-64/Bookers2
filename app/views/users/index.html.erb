@@ -1,27 +1,37 @@
-<main>
-        <p id="notice"></p>
-        <div class="container">
+<div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-    <h2>User info</h2>
-    <form enctype="multipart/form-data" action="/users/12420" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="patch"><input type="hidden" name="authenticity_token" value="qe9J7D3v61jwSb5NjQBfBgdYJbOi8fG+f4mtx08GtBL7xmp1dF+ghSXr3H9QzL23nvSnKjMgXUaowSjXqqUHLg==">
-      
-      <div class="form-group">
-        <label for="user_name">Name</label>
-        <input class="form-control name" type="text" value="gen" name="user[name]" id="user_name">
-      </div>
-     <div class="form-group">
-        <label for="user_image">Image</label>
-        <input value="{}" data-reference="689af23b55ffb3fdfaccfe00d99789ec" type="hidden" name="user[profile_image]"><input class="form-control-file user_image" data-reference="689af23b55ffb3fdfaccfe00d99789ec" include_hidden="false" type="file" name="user[profile_image]" id="user_profile_image">
-      </div>
-      <div class="form-group">
-        <label for="user_introduction">Introduction</label>
-        <textarea class="form-control introduction" name="user[introduction]" id="user_introduction"></textarea>
-      </div>
-      <div class="form-group">
-        <input type="submit" name="commit" value="Update User" class="btn btn-secondary" data-disable-with="Update User">
-      </div>
-</form>  </div>
+   <div class="col-md-3">
+    <%=render "/books/user-info", user: @user, book: @book %>
+   </div>
+
+   <div class="col-md-8 offset-md-1">
+          <h2>Users</h2>
+          <table class="table table-hover table-inverse">
+                 <thead>
+                    <tr>
+                      <th>image</th>
+                      <th>name</th>
+                      <th colspan="3"></th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% @users.each do |user| %>
+
+                     <tr>
+                        <td><%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></td>
+                        <td><%= user.name %></td>
+                        <td><%= link_to "Show", user_path(user) %></td>
+                      </tr>
+                     <% end %>
+
+                  </tbody>
+         </table>
+   </div>
+
+  </div>
 </div>
 
-      </div></main>
+
+
+
